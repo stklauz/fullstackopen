@@ -1,12 +1,8 @@
 // Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: Header, Content, and Total. All data still resides in the App component, which passes the necessary data to each component using props. Header takes care of rendering the name of the course, Content renders the parts and their number of exercises and Total renders the total number of exercises.
 // Define the new components in the file App.jsx.
 
-const Header = () => {
-  const course = 'Half Stack application development'
-  return (
-    <h1>{course}</h1>
-  )
-}
+const Header = ({ title }) => <h1>{title}</h1>
+
 
 const Part = (props) => {
   return (
@@ -35,20 +31,27 @@ const Total = (props) => {
 }
 
 const App = () => {
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const course = 'Half Stack application development'
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
 
   return (
     <div>
-      <Header />
-      <Content part1={part1} exercises1={exercises1}
-               part2={part2} exercises2={exercises2}
-               part3={part3} exercises3={exercises3} />
-      <Total total={exercises1 + exercises2 + exercises3}/>
+      <Header title={course} />
+      <Content part1={part1.name} exercises1={part1.exercises}
+               part2={part2.name} exercises2={part2.exercises}
+               part3={part3.name} exercises3={part3.exercises} />
+      <Total total={part1.exercises + part2.exercises + part3.exercises}/>
     </div>
   )
 }
